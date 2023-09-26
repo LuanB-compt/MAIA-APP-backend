@@ -1,7 +1,9 @@
 import { Router } from "express";
-import { Controller } from "../controller/control";
+import { UserController } from "../controller/user";
+import { db } from "../database/firebase";
 
 export const router = Router();
-const controller = new Controller();
+const controller = new UserController();
 
 router.get('/', controller.endpoint);
+router.get('/users', controller.getUsers);

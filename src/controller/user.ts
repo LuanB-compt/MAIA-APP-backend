@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
-//const { initializeApp } = require("firebase-admin/app");
-import { initializeApp } from "firebase-admin/app";
+import { UserService } from "../services/UserService";
 
-export class Controller{
+export class UserController{
     constructor(){
         console.log("Initialized the router manager");
     }
@@ -10,5 +9,9 @@ export class Controller{
     public endpoint(req: Request, res: Response){
         console.log(req.method);
         res.json({message: "Hello world"});
+    }
+
+    public async getUsers(req: Request, res: Response) {
+        res.status(200).send()
     }
 }
