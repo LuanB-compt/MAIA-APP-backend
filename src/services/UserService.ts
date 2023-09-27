@@ -1,15 +1,14 @@
-import { User } from "../entities/User";
+import { User } from "../models/User";
 import { db } from "../database/firebase";
 import { documentConverter } from "../utils/DocumentConverter";
 
 export class UserService {
-    constructor(){
+    constructor(){}
 
-    }
-
-    public async getUsers(): Promise<User[]>{
-        const userRef = db.collection('user').doc('user').withConverter(documentConverter()).get();
+    public async getUsers(): Promise<User[] | undefined> {
+        const userRef = db.collection('user').doc('user').withConverter(documentConverter<User[]>());
         const doc = await userRef.get();
-        return 
+        const data = doc.data();
+        return data;
     }
 }

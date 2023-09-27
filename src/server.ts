@@ -1,9 +1,12 @@
-import express from "express";
-import { router } from "./routes/routes";
+import 'reflect-metadata';
+import { UserController } from './controllers/UserController';
+import App from './app';
 
-const app = express();
-app.use(express.json());
-
-app.use(router);
-app.listen(3000, () => console.log("Server running on port 3000"));
-     
+const app = new App(
+    [
+      new UserController(),
+    ],
+    3000,
+);
+   
+app.listen();
