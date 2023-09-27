@@ -1,14 +1,12 @@
 import { User } from "../models/User";
-import { db } from "../database/firebase";
-import { documentConverter } from "../utils/DocumentConverter";
+import { UserRepository } from "../repositories/UserRepository";
 
 export class UserService {
+    private readonly userRepository: UserRepository = new UserRepository();
+
     constructor(){}
 
     public async getUsers(): Promise<User[] | undefined> {
-        const userRef = db.collection('user').doc('user').withConverter(documentConverter<User[]>());
-        const doc = await userRef.get();
-        const data = doc.data();
-        return data;
+        return this.userRepository.findAllUsers();
     }
 }

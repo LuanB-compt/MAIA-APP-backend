@@ -1,12 +1,11 @@
 import { Request, Response, Router } from "express";
-import { Container, Service } from 'typedi';
 
 import { UserService } from "../services/UserService";
 
 export class UserController{
     public path: string = "/user"
     public router = Router()
-    private userService: UserService = new UserService();
+    private readonly userService: UserService = new UserService();
 
     constructor() {
         this.initRoutes()
