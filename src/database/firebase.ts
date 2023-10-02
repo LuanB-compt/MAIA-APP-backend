@@ -6,4 +6,4 @@ initializeApp({
     credential: cert(myRefreshToken as ServiceAccount),
 });
 
-export const db = getFirestore()
+export const db = getFirestore();

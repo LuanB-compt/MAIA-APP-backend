@@ -1,4 +1,5 @@
-import { DocumentData, FirestoreDataConverter, QueryDocumentSnapshot, SnapshotOptions } from 'firebase/firestore';
+import { DocumentData, QueryDocumentSnapshot } from 'firebase-admin/firestore';
+
 export function documentConverter<T extends object>() {
     return {
         toFirestore(arg: T): DocumentData {
