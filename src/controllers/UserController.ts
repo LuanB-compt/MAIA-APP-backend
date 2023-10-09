@@ -3,18 +3,18 @@ import { User } from "../models/User";
 import { UserService } from "../services/UserService";
 
 export class UserController{
-    public path: string = "/user"
-    public router = Router()
+    public path: string = "/user";
+    public router = Router();
     private readonly userService: UserService = new UserService();
 
     constructor() {
-        this.initRoutes()
+        this.initRoutes();
     }
 
     private initRoutes() {
+        this.router.post(this.path, this.postCreateUser.bind(this));
         this.router.get(this.path, this.getAllUsers.bind(this));
         this.router.get(this.path + '/:uid', this.getUserByUid.bind(this));
-        this.router.post(this.path, this.postCreateUser.bind(this));
     }
 
     public async postCreateUser(req: Request, res: Response){
@@ -22,16 +22,16 @@ export class UserController{
         const newUser: User = {uid, name, ra, password, team};
         const isCreated = this.userService.createUser(newUser) != undefined;
         if (isCreated) {
-            res.status(201);
+            res.status(201).send(newUser);
         }else{
-            res.status(400);
+            res.status(400).send({});
         }
     }
-    
+
     public async getAllUsers(req: Request, res: Response) {
         const users = await this.userService.getUsers();
         if (users == undefined) {
-            res.status(400);
+            res.status(400).send({});
         }else{
             res.status(200).send(users);
         }
@@ -40,7 +40,7 @@ export class UserController{
     public async getUserByUid(req: Request, res: Response) {
         const user = await this.userService.getUserByUid(req.params.uid);
         if (user == undefined){
-            res.status(400);
+            res.status(400).send({});
         } else {
             res.status(200).send(user);
         }
